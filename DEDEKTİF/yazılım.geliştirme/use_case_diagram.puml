@@ -1,0 +1,86 @@
+@startuml Criminal Case - Use Case Diagram
+
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+'title Criminal Case: İstanbul Dosyaları - Use Case Diagram
+
+rectangle "Criminal Case\nİstanbul Dosyaları" {
+    
+    usecase "Oyunu Başlat" as UC1
+    usecase "Bölüm Seç" as UC2
+    usecase "Hikayeyi Oku" as UC3
+    usecase "Şüpheli Bilgisi Görüntüle" as UC4
+    usecase "Olay Yerini İncele" as UC5
+    usecase "Delil Topla" as UC6
+    usecase "Delil Analizi Yap" as UC7
+    usecase "Laboratuvar Sonucu Gör" as UC8
+    usecase "Şüpheli Suçla" as UC9
+    usecase "Karar Ekranı Gör" as UC10
+    usecase "Bölüm Geçişi Yap" as UC11
+    usecase "Skor Görüntüle" as UC12
+    usecase "Dosya Kaydet" as UC13
+    usecase "Oyunu Yeniden Oyna" as UC14
+    
+    ' İlişkiler
+    UC1 ..> UC2 : <<include>>
+    UC2 ..> UC3 : <<include>>
+    UC3 ..> UC4 : <<include>>
+    
+    UC5 ..> UC6 : <<include>>
+    UC6 ..> UC7 : <<extend>>
+    UC7 ..> UC8 : <<include>>
+    
+    UC8 ..> UC9 : <<extend>>
+    UC9 ..> UC10 : <<include>>
+    UC10 ..> UC11 : <<extend>>
+    UC10 ..> UC12 : <<include>>
+    
+    UC12 ..> UC13 : <<extend>>
+    UC12 ..> UC14 : <<extend>>
+    
+}
+
+actor "Oyuncu\n(Dedektif)" as Player
+
+' Actor bağlantıları
+Player --> UC1
+Player --> UC5
+Player --> UC7
+Player --> UC9
+Player --> UC13
+Player --> UC14
+
+note right of Player
+  **Oyuncu Rolü:**
+  - Oyunu kontrol eder
+  - Seçimler yapar
+  - Delilleri toplar
+  - Analizleri başlatır
+  - Suçlamaları yapar
+end note
+
+note bottom of UC6
+  **Temel Akış:**
+  1. Olay yerini incele
+  2. Rastgele 1-3 delil bul
+  3. Envantere ekle
+end note
+
+note bottom of UC7
+  **Analiz Akışı:**
+  1. Delil seç
+  2. Progress bar animasyonu
+  3. Şüpheli eşleştirme
+  4. Sonucu göster
+end note
+
+note bottom of UC9
+  **Suçlama Kuralları:**
+  - Minimum delil gerekli
+  - Doğru/yanlış sonuç
+  - Skor hesaplama
+end note
+
+@enduml
