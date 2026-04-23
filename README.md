@@ -1,0 +1,2 @@
+# DEDEKT-F
+dedektiflik oyunu
